@@ -1,0 +1,2 @@
+include ':app',':upH5Container'
+project(':upH5Container').projectDir = new File(settingsDir, '../upH5Container')

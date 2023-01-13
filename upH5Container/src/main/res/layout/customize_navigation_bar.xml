@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/customize_title_bar_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/status_bar_adjust_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/title_bar_rl_layout"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+        <ImageButton
+            android:id="@+id/title_bar_nav_back"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:background="@android:color/transparent"
+            android:padding="12dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/nebula_icon_back" />
+
+        <ImageButton
+            android:id="@+id/title_bar_nav_close"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="-6dp"
+            android:layout_toEndOf="@+id/title_bar_nav_back"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:padding="12dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/nebula_icon_close"
+            android:visibility="gone"
+            android:focusable="true" />
+
+        <View
+            android:id="@+id/title_bar_divider"
+            android:layout_width="0.7dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginEnd="12dp"
+            android:layout_toEndOf="@+id/title_bar_nav_close"
+            tools:ignore="ContentDescription" />
+
+        <FrameLayout
+            android:id="@+id/title_bar_fl"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginEnd="48dp"
+            android:layout_toEndOf="@+id/title_bar_divider"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/title_bar_title_tv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:textSize="16dp" />
+        </FrameLayout>
+    </RelativeLayout>
+</LinearLayout>

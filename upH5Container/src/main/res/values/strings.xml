@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">UpNebula</string>
+
+    <string name="nebula_network_none">网络不可用，请稍候重试</string>
+    <string name="nebula_network_error">网络不可用，请稍候重试</string>
+    <string name="nebula_network_timeout">网络超时，请稍候重试</string>
+    <string name="nebula_try_again">重试</string>
+</resources>

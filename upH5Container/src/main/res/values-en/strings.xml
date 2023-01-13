@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">UpNebula</string>
+
+    <string name="nebula_network_none">Network disconnected, please check network</string>
+    <string name="nebula_network_error">Network disconnected, please check network</string>
+    <string name="nebula_network_timeout">Request server timeout, please try again later</string>
+    <string name="nebula_try_again">Try again</string>
+</resources>

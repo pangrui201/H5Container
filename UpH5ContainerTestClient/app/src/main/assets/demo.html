@@ -1,0 +1,157 @@
+﻿<html>
+<head>
+    <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>
+        Tamic
+    </title>
+</head>
+
+<body>
+<p>
+    <xmp id="show">
+    </xmp>
+</p>
+<p>
+    <xmp id="init">
+    </xmp>
+</p>
+<p>
+    <input type="text" id="text1" value="username"/>
+</p>
+
+<p>
+    <input type="text" id="text2" value="password"/>
+</p>
+
+<p>
+    <input type="button" id="enter1" value="登录1（响应Native方法）" onclick="login();"
+    />
+</p>
+
+<p>
+    <input type="button" id="enter2" value="显示源代码" onclick="testDiv();"/>
+</p>
+
+
+<p>
+    <input type="button" id="CallNative" value="调用native" onclick="callFromJs();"/>
+</p>
+<p>
+    <input type="button" id="showTitle" value="测试拦截器显示Title" onclick="showTitle();"/>
+</p>
+<p>
+    <input type="file" id="open" value="打开文件" onclick="onOpen();"/>
+</p>
+
+</body>
+
+<script>
+      document.addEventListener('resume', function(event) {
+        console.log("resume",event?.data);
+      },false);
+
+      document.addEventListener('pause', function(event) {
+        console.log("pause",event?.data);
+      },false);
+      document.addEventListener('callFromNative', function(event) {
+        console.log("callFromNative11",event?.data);
+      },false);
+
+      function bridgeLog(logContent) {
+            document.getElementById("show").innerHTML = logContent;
+        }
+        function connectWebViewJavascriptBridge(callback) {
+            if (window.AlipayJSBridge) {
+                callback(window.AlipayJSBridge)
+            } else {
+                document.addEventListener(
+                    'AlipayJSBridgeReady'
+                    , function() {
+                        callback(window.AlipayJSBridge)
+                    },
+                    false
+                );
+            }
+        }
+       // 第一连接时初始化bridage
+        connectWebViewJavascriptBridge(function(bridge) {
+            // 注册一个"callNative"函数,
+            bridge.call("callNative", "我是AlipayJSBridgeReady后第一次js调用",function(data, responseCallback) {
+                document.getElementById("show").innerHTML = ("data from Java: = " + data);
+                var responseData = "hello java !  我要你的地址!";
+
+                alert('JS say:'+  responseData);
+
+                // response层
+                responseCallback(responseData);
+            });
+        })
+        function callFromJs() {
+            var data = "我要你一个url";
+            //call native method
+            window.AlipayJSBridge.call(
+                'callFromJs'
+                , {'param': data }
+                , function(responseData) {
+                console.log("responseData");
+                 alert('Js 收到你的地址:'+ responseData);
+
+                }
+            );
+        }
+
+
+        function showTitle() {
+            var data = {"show":true,"title":"我是来自js的title"};
+            //call native method
+            window.AlipayJSBridge.call(
+                'setShowTitle'
+                , {'param': data }
+                , function(responseData) {
+                console.log("responseData");
+                 alert('Js 收到你的地址:'+ responseData);
+
+                }
+            );
+        }
+
+          function onOpen() {
+          　
+            var data = "我要你打开相册";
+            //call native method
+            window.AlipayJSBridge.call(
+                'open'
+                , {'param': data }
+                , function(responseData) {
+
+                 alert('Js 收到你的:'+ responseData);
+                 document.getElementById("open").innerHTML = "send get responseData from java, data = " + responseData;
+                }
+            );
+        }
+        function testDiv() {
+            document.getElementById("show").innerHTML = document.getElementsByTagName("html")[0].innerHTML;
+        }
+
+        function login() {
+            alert("111");
+            var str1 = document.getElementById("text1").value;
+            var str2 = document.getElementById("text2").value;
+            var data = "name=" + str1 + ",pass=" + str2;
+            //call native method
+             console.log("demo#login")
+            window.AlipayJSBridge.call(
+                'login'
+                , {'param': data }
+                , function(responseData) {
+                    document.getElementById("show").innerHTML = "send get responseData from java, data = " + responseData
+                }
+            );
+        }
+
+</script>
+
+</html>

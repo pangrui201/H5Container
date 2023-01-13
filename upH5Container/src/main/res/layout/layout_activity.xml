@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true"
+    android:gravity="center"
+    tools:context=".activity.MainActivity">
+
+    <com.haier.uhome.h5container.view.CustomizeTitleView
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
+
+    <FrameLayout
+        android:id="@+id/activity_webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/title_bar"
+        android:background="@android:color/white">
+        <com.haier.uhome.h5container.browse.BridgeWebView
+            android:id="@+id/webview"
+            style="@style/NumberProgressBar_Default"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </com.haier.uhome.h5container.browse.BridgeWebView>
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/page_error_ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/title_bar"
+        android:background="#f5f5f5"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="100dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/cloud" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:scaleType="centerInside"
+            android:src="@drawable/robot" />
+
+        <TextView
+            android:id="@+id/try_again_tv"
+            android:layout_width="220dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/h5_error_page_shape_trans"
+            android:gravity="center"
+            android:text="@string/nebula_try_again"
+            android:textColor="#ffffff"
+            android:textSize="17sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_ads_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="12dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="16dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/btn_goto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/h5_shape_circle"
+            android:maxLength="5"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp"
+            android:textColor="@android:color/white"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginStart="15dp"
+            android:src="@drawable/h5_ads_close" />
+    </LinearLayout><!---->
+
+</RelativeLayout>

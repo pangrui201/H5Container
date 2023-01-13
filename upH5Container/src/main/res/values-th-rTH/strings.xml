@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">UpNebula</string>
+
+    <string name="nebula_network_none">เน็ตเวิร์คไม่เชื่อมต่อ,กรุณาตรวจสอบเน็ตเวิร์ค</string>
+    <string name="nebula_network_error">เน็ตเวิร์คไม่เชื่อมต่อ,กรุณาตรวจสอบเน็ตเวิร์ค</string>
+    <string name="nebula_network_timeout">การร้องขอใช้เซอร์ฟเวอร์หมดเวลา,กรุณาลองใหม่อีกครั้งภายหลัง </string>
+    <string name="nebula_try_again">ลองใหม่อีกครั้ง</string>
+</resources>

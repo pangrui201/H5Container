@@ -74,7 +74,7 @@ public class InterceptorServiceImpl implements InterceptorService {
                 public void run() {
                     CancelableCountDownLatch interceptorCounter = new CancelableCountDownLatch(interceptorsClass.size());
                     try {
-                        _execute(0, interceptorCounter, message);
+                        _execute(0, interceptorCounter, message,callback);
                         interceptorCounter.await(300, TimeUnit.SECONDS);
                         if (interceptorCounter.getCount() > 0) {    // Cancel the navigation this time, if it hasn't return anythings.
                             callback.onInterrupt(message,new HandlerException("The interceptor processing timed out."));
@@ -98,7 +98,7 @@ public class InterceptorServiceImpl implements InterceptorService {
      * @param counter interceptor counter
      * @param message message
      */
-    private void _execute(final int index, final CancelableCountDownLatch counter, final Message message) {
+    private void _execute(final int index, final CancelableCountDownLatch counter, final Message message, InterceptorCallback callback) {
         if (index < requestInterceptors.size()) {
             Interceptor iInterceptor = requestInterceptors.get(index);
             iInterceptor.process(message, new InterceptorCallback() {
@@ -106,13 +106,14 @@ public class InterceptorServiceImpl implements InterceptorService {
                 public void onContinue(Message message) {
                     // Last interceptor excute over with no exception.
                     counter.countDown();
-                    _execute(index + 1, counter, message);  // When counter is down, it will be execute continue ,but index bigger than interceptors size, then U know.
+                    _execute(index + 1, counter, message,callback);  // When counter is down, it will be execute continue ,but index bigger than interceptors size, then U know.
                 }
 
                 @Override
                 public void onInterrupt(Message message,Throwable exception) {
                     // Last interceptor execute over with fatal exception.
                     counter.cancel();
+                    callback.onInterrupt(message,exception);
                     // Be attention, maybe the thread in callback has been changed,
                     // then the catch block(L207) will be invalid.
                     // The worst is the thread changed to main thread, then the app will be crash, if you throw this exception!
